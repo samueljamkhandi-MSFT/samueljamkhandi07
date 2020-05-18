@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": null
+    },
+    "vnetName": {
+      "value": null
+    },
+    "subnetName": {
+      "value": null
+    },
+    "virtualMachineName": {
+      "value": null
+    },
+    "osDiskType": {
+      "value": null
+    },
+    "virtualMachineSize": {
+      "value": null
+    },
+    "adminUsername": {
+      "value": null
+    },
+    "adminPassword": {
+      "value": null
+    },
+    "availabilitySetName": {
+      "value": null
+    },
+    "loadBalancerName": {
+      "value": null
+    },
+    "backendPoolName": {
+      "value": null
+    }
+  }
+}
