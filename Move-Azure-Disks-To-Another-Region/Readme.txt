@@ -1,0 +1,1 @@
+This script can be used to copy the Managed disks to different Azure Region

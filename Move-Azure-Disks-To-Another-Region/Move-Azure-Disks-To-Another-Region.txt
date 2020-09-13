@@ -1,0 +1,21 @@
+#Source Managed Disk Details
+$rgName ="suse"
+$location ="West Europe"
+$diskName ="susevm-ea-newosdisk"
+
+#Target storage account
+$destrgName ="roger02"
+$destlocation ="East Asia"
+$deststorageAccountName ="roger1026"
+$destdiskName = "susevm-ea-newosdisk2.vhd"
+
+#Assign access to the source disk
+$sas =Grant-AzDiskAccess -ResourceGroupName $rgName -DiskName $diskName -DurationInSecond 3600 -Access Read
+
+$saKey =Get-AzStorageAccountKey -ResourceGroupName $destrgName -Name $deststorageAccountName
+$storageContext =New-AzStorageContext –StorageAccountName $deststorageAccountName -StorageAccountKey $saKey[0].Value
+#New-AzStorageContainer -Context $storageContext -Name vhds10261
+
+Start-AzStorageBlobCopy -AbsoluteUri $sas.AccessSAS -DestContainer vhds10261 -DestContext $storageContext -DestBlob $destdiskName
+
+Get-AzStorageBlobCopyState -Context $storageContext -Blob $destdiskName -Container vhds10261
