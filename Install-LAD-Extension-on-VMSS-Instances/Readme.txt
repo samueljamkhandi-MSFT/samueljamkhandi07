@@ -1,0 +1,1 @@
+This script can be used to Install-LAD-Extension-on-VMSS-Instances

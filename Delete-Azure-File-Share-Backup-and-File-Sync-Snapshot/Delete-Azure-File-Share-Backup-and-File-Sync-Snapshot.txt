@@ -1,0 +1,27 @@
+param(
+    [Parameter(Mandatory=$true)] 
+    [string] $SubscriptionId,
+ 
+    [Parameter(Mandatory=$true)] 
+    [string] $RGName,
+ 
+    [Parameter(Mandatory=$true)] 
+    [string] $StorageAccountName,
+ 
+    [Parameter(Mandatory=$true)] 
+    [string] $FileShareName)
+ 
+Connect-AzureRmAccount
+$sub = Get-AzureRmSubscription -SubscriptionId $SubscriptionId
+Select-AzureRmSubscription -SubscriptionObject $sub[0]
+$sa = Get-AzureRmStorageAccount -ResourceGroupName $RGName -Name $StorageAccountName
+ 
+ 
+# Generate Snapshot List
+$SnapshotList = Get-AzureStorageShare -Context $sa.context | Where-Object {$_.Name -eq $FileShareName -and $_.IsSnapshot -eq $true -and $_.SnapshotTime -lt ([datetime]::UtcNow.AddDays(-40))}
+ 
+# Delete Snapshots older than 40 days
+foreach ($Snapshot in $SnapshotList)
+    {
+        Remove-AzureStorageShare -Share $Snapshot -Verbose -Force
+    }

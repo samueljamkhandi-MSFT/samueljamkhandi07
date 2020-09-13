@@ -1,0 +1,1 @@
+This is script can be used to Delete-Azure-File-Share-Backup-and-File-Sync-Snapshot
