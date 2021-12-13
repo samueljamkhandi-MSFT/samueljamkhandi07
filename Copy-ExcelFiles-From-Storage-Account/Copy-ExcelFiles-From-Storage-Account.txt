@@ -1,0 +1,7 @@
+-- Login to the VM on which you want excel files to be copied
+-- Download Azcopy from https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
+-- Extract the Azcopy zip file
+-- Change directory to C:\Users\<username>\Downloads\azcopy_windows_amd64_10.12.1\azcopy_windows_amd64_10.12.1
+-- Run following command to copy files from storage account to VM.
+ 
+.\azcopy.exe copy 'https://asdasd.blob.core.windows.net/test?sp=racwdl&st=2021-09-06T02:37:26Z&se=2021-09-06T10:37:26Z&spr=https&sv=2020-08-04&sr=c&sig=3gdJo%3D' 'C:\Users\<username>\Downloads\excelfiles' --include-pattern '*.xlsx*' --recursive
